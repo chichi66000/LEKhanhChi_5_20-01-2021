@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+	<meta name="description" content="Orinoco, site e-commerce en ligne, groupe de produits thématiques, OrioBooks - livres, OrioTextile - vêtements, application, panier du produit">
+	<meta name="robots" content="index,follow"/>
+	<meta http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../BOOTSTRAP/bootstrap-5.0.0-beta1-dist/bootstrap-5.0.0-beta1-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+    <title>Orinoco, paiement</title>
+</head>
+<body>
+    <div class="page-container">
+
+        <!-- boc0 -->
+        <div class="container-fluid bg-light"> <!--Menu accueil-->
+            <nav class="navbar navbar-expand-md">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="images/logo.ico" alt="logo Orinoco, site e-commerce en ligne, groupe de produits thématiques, OrioBooks - livres, OrioTextile - vêtements, application "/>
+                    </a>
+                    <button class="navbar-toggle" type = "button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls = "navbarNav" aria-expanded="false" aria-label = "Toggle navigation"><span class ="navbar-toggle-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse offset-lg-4 offset-md-1" id="navbarContent">
+                        <ul class="navbar-nav text-center">
+                            <li class="navbar-item align-self-end">
+                                <a class="nav-link " href="#">Accueil</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a class="nav-link" href="#"><i class="fas fa-heart"></i>
+                                <br>Mes préféré</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a class="nav-link" href="#"><i class="fas fa-user-alt"></i>
+                                    <br>Mon compte</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> <br>Panier</a>
+                            </li>
+                        </ul>
+    
+                    </div>
+                </div>
+            </nav>
+    
+        </div>
+        <!-- fin bloc0 -->
+
+        <!-- bloc1 -->
+        
+        <h3 class=" row text-left m-auto text-danger fw-bold">
+                Récapitulatif de votre panier
+        </h3>
+        <hr class="text-danger">
+        <div class="row">
+            <table class="table m-auto col-8">
+                <thead>
+                    <tr>
+                        <th class="col-2">Produit</th>
+                        <th class="col-3">Nom</th>
+                        <th class="col-1">Quantité</th>
+                        <th class="col-1">Prix</th>
+                        <th class="col-1">Total</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr>
+                        <td class="col-2"><img class="img-fluid img-thumbnail w-25" src="http://localhost:3000/images/teddy_1.jpg" alt="ours peluche"/></td>
+                        <td class="col-3">Ours Brun</td>
+                        <td class="col-1">
+                            <input type="number" class="form-control w-50" placeholder="1">
+                        </td>
+                        <td class="col-1"><p class="fw-bold">12</p></td>
+                        <td class="col-1"><p class="fw-bold">12</p></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="col-3">
+
+                <h4 class="text-danger">Adresse de livraison</h4>
+                <table class="table">
+                    
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
