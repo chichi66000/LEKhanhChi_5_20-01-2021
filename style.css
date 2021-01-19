@@ -1,0 +1,51 @@
+a{
+    text-decoration:none;
+}
+a:hover ,
+a:focus {
+    color: darkblue!important;
+}
+
+/*style pour page accueil */
+.fab{
+font-size: 2rem;
+}
+a.list-group-item{
+background-color:#f8f9fa!important;
+border:none;
+}
+
+/* style pour page produit */
+.hide{
+    opacity:0;
+    text-decoration: none;
+    height:0;
+}
+.produit{
+    height: 25rem
+}
+.produit:hover > .hide{
+    opacity:1;
+    height:auto;
+    transition:0.3s;
+}
+
+/* style pour panier*/
+.choix_en_plus{
+    height: 16rem;
+}
+
+@media screen and (max-width:767px) {
+    i.fas {
+        display:none;
+    }
+    .navbar-item{
+        align-self:flex-end;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .choix_en_plus{
+        height: 12rem;
+    }
+}
