@@ -9,6 +9,7 @@ a:focus {
 /*style pour page accueil */
 .fab{
 font-size: 2rem;
+color: #339af0;
 }
 a.list-group-item{
 background-color:#f8f9fa!important;
@@ -35,9 +36,20 @@ border:none;
     height: 16rem;
 }
 
+/* style pour page paiement */
+.produit_paiement img{
+    width:3rem!important;
+}
+
+/*style pour page confirmation*/
+.text-right{
+    text-align:right!important;
+}
 @media screen and (max-width:767px) {
     i.fas {
         display:none;
+        width:0;
+        height:0;
     }
     .navbar-item{
         align-self:flex-end;
@@ -48,4 +60,12 @@ border:none;
     .choix_en_plus{
         height: 12rem;
     }
+  
+}
+@media screen and (max-width:400px) {
+    .produit_paiement{
+        display:none;
+        
+    }
+    
 }
