@@ -17,6 +17,8 @@ info.onerror = function() {
     alert("requete a échoué");
 } // tester ok 
 
+
+
 /* Page produit_ours: prendre les informations du response et charger sur les éléments du page panier */
 
 let ours = document.querySelectorAll('.ours');
@@ -30,10 +32,6 @@ ours.forEach( function(item) {
         }
     }
 })
-
-
-
-
 
 
 
