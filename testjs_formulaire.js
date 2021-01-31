@@ -20,7 +20,7 @@
             let text_nom = /^[a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+([a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+)?$/;
             let text_validation = /^[a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+([-'\s][a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+)?$/;
             let tel_validation = /[0-9]{10}/;
-            let adresse_validation = /^[0-9]+[\s]+(rue|avenue|route|impasse|r|ave|im|bis)+[\s]+[a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]/;
+            let adresse_validation = /^[0-9]+[\s]+[a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]/;
             let ville_validation = /^[a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+/;
             let pays_validation = /France|Belgique|Allemagne|Espagne]/i;
             let codePostal_validation = /[0-9]{5}/;
