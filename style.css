@@ -1,5 +1,5 @@
 a{
-    text-decoration:none;
+    text-decoration:none!important;
 }
 a:hover ,
 a:focus {
@@ -30,7 +30,9 @@ border:none;
     height:auto;
     transition:0.3s;
 }
-
+.add-cart {
+    cursor: pointer;
+}
 /* style pour panier*/
 .choix_en_plus{
     height: 16rem;
@@ -45,7 +47,7 @@ border:none;
 .text-right{
     text-align:right!important;
 }
-@media screen and (max-width:767px) {
+@media screen and (min-width: 576px) and (max-width:767px) {
     i.fas {
         display:none;
         width:0;
@@ -58,7 +60,12 @@ border:none;
 
 @media screen and (max-width:575px) {
     .choix_en_plus{
-        height: 12rem;
+        height: 16 rem;
+    }
+    i.fas {
+        display:none;
+        width:0;
+        height:0;
     }
   
 }
