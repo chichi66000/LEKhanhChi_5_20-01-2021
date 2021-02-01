@@ -5,14 +5,17 @@ let promise = fetch('http://localhost:3000/api/teddies')
     .catch ( error => alert('erreur' + error));
 
     
+
+
     function chargerArticle (data) {
         let ours = data;
         let id = window.location.href.split("=");
         let ref = id[1];
         for( let i=0; i<ours.length;i++) {
+            //si la référence dans url est le meme que _id du produit ours, on charge les data de cet ours
             if (ref === ours[i]._id) {
                 let article = document.querySelector('.article');
-
+                //On ajoute les éléments HTML de façon dynamique
                 let col_photo_ours = document.createElement('div');
                     col_photo_ours.setAttribute('class','col-sm-6 text-center');
                     article.appendChild(col_photo_ours);
@@ -35,7 +38,7 @@ let promise = fetch('http://localhost:3000/api/teddies')
                     price.setAttribute('class', 'fw-bold fs-2');
                     price.innerHTML = 'Prix : '+ ours[i].price;
                     div.appendChild(price);
-
+                // on ajoute label et select avec option couleur
                 let select = document.createElement('label');
                     select.setAttribute('class', 'pl-3');
                     select.setAttribute('for', 'color');
@@ -70,9 +73,9 @@ let promise = fetch('http://localhost:3000/api/teddies')
                     textDescrip.setAttribute('class', 'w-md-50 text-justify');
                     textDescrip.innerHTML = ours[i].description;
                     div.appendChild(textDescrip);
-
+                // ajoute un button et et data-* pour récupérer info pour panier
                 let button = document.createElement('button');
-                    button.setAttribute('class', 'btn btn-primary mt-3 mb-3');
+                    button.setAttribute('class', 'btn btn-primary mt-3 mb-3 add-cart');
                     button.setAttribute('type','submit');
                     button.setAttribute('data-id', ours[i]._id);
                     button.setAttribute('data-name', ours[i].name);
@@ -81,21 +84,23 @@ let promise = fetch('http://localhost:3000/api/teddies')
                     button.setAttribute('data-phto', ours[i].imageUrl);
                     button.innerHTML = 'Ajouter au panier';
                     div.appendChild(button);
-
-                let nombreArticle = document.getElementById('in-cart-items-num');
-                let s = 0;
-                button.addEventListener('click', function addCart(e) {
-                    e.preventDefault();
-                    alert('1 article a bien ajouté');
-                    s++;
-                    nombreArticle.innerHTML = '(' + s +')';
-                });
+                // quand on click sur button, un message s'affiche et 1 article ajouté au panier
+                // let nombreArticle = document.getElementById('in-cart-items-num');
+                // let s = 0;
+                // button.addEventListener('click', function addCart(e) {
+                //     e.preventDefault();
+                //     alert('1 article a bien ajouté');
+                //     s++;
+                //     nombreArticle.innerHTML = '(' + s +')';
+                // });
 
             }
+            // si la référence n'est pas identique que _id; on les affiche en tant que d'autre droduits
             else {
                 let autreArticle = document.querySelector('.autreArticle');
                 let autreProduit = document.createElement('a');
-                    autreProduit.setAttribute('class', 'card col-5 col-md-3 text-center m-auto mb-2 p-0 choix_en_plus');
+                    autreProduit.setAttribute('class', 'card col-5 col-md-3 text-center m-auto mb-2 p-0 choix_en_plus produit pb-2');
+                    autreProduit.href = "teddyEnJs.html" + '?id=' + ours[i]._id;
                 let autrePhoto = document.createElement('img');
                     autrePhoto.setAttribute('class', 'card-img-top h-75');
                     autrePhoto.setAttribute('src', ours[i].imageUrl);
@@ -105,28 +110,34 @@ let promise = fetch('http://localhost:3000/api/teddies')
                     autreTitle.setAttribute('class', 'card-title');
                     autreTitle.innerHTML = ours[i].name;
                     autreProduit.appendChild(autreTitle);
-                    
+                // let paragraphe = document.createElement('p');
+                //     paragraphe.setAttribute('class', 'card-text hide p-1');
+                //     paragraphe.innerHTML = "Ajouter au panier";
+                //     autreProduit.appendChild(paragraphe);
+
                 autreArticle.append(autreProduit);
 
             }
         } 
 
-        /* Faire un cookie pour mémoriser les choix dans panier */
-        function setCookie ( cName, cValue, exDay) {
-            var d = new Date();
-            d.setTime(d.getTime() + (exDay*24*60*60*1000));
-            var expires = "expires="+d.toUTCString();
+        /* utiliser localStorage pour stocker les info dans le panier */
 
-            if ('btoa' in window) {
-                cValue = btoa(cValue);
-            }
-            document.cookie = cName + "=" + cValue + "; " + expires+';path=/';
-        }
-        function saveCart (inCartItemNumber, cartArticle) {
-            setCookie ('inCartItemNumber', inCartItemNumber, 3);
-            setCookie ('cartArticle', JSON.stringify(cartArticle), 3);
-        }
+        let cart = document.querySelector('.add-cart');
+        
+        cart.addEventListener('click', () =>{
+                 cartNumber();
+                
+                
+            })
+        
 
+         function cartNumber () {
+            localStorage.setItem('cartNumber',1);
+            let productNumber = localStorage.getItem('cartNumber');
+            productNumber.parseInt(productNumber);
+            if(productNumber) { localStorage.setItem('cartNumber', productNumber + 1)}
+            else {localStorage.setItem('cartNumber',1);}
+            document.getElementById('in-cart-items-num').innerHTML = productNumber + 1;
         }
-    
-   
+        
+    }
