@@ -34,5 +34,7 @@ let promise = fetch('http://localhost:3000/api/teddies')
                 para.innerHTML = "Prix : " + ours[i].price;
                 link.appendChild(para);
         }
-        
+       
+
     }   
+    // importer la fonction onLoadCartNumber() depuis fichier teddyEnJs.js???
