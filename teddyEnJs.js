@@ -2,15 +2,14 @@
 let promise = fetch('http://localhost:3000/api/teddies')
     .then (response => response.json())
         .then (data => chargerArticle (data))
-    .catch ( error => alert('erreur' + error));
+        
+        .catch ( error => alert('erreur' + error));
 
-    
-
-
-    function chargerArticle (data) {
+        function chargerArticle(data) {
         let ours = data;
         let id = window.location.href.split("=");
         let ref = id[1];
+        /* Charegement les informations au page html teddyEnJs*/
         for( let i=0; i<ours.length;i++) {
             //si la référence dans url est le meme que _id du produit ours, on charge les data de cet ours
             if (ref === ours[i]._id) {
@@ -22,7 +21,7 @@ let promise = fetch('http://localhost:3000/api/teddies')
 
                 let photo = document.createElement('img');
                     photo.setAttribute('class','photo_ours w-75 m-auto img-fluid img-thumbnail');
-                    photo.setAttribute('alt', ours[i].name)
+                    photo.setAttribute('alt', ours.name)
                     photo.src = ours[i].imageUrl;
                     col_photo_ours.appendChild(photo);
 
@@ -55,7 +54,7 @@ let promise = fetch('http://localhost:3000/api/teddies')
                 let j = 0;
                     for ( j= 0 ; j<ours[i].colors.length; j++) {
                         let colorOption = document.createElement('option');
-                        colorOption.setAttribute('value', ours[i].colors.length[j]);
+                        colorOption.setAttribute('value', ours[i].colors[j].length);
                         colorOption.innerHTML = ours[i].colors[j];
                         choixColor.append(colorOption);
                     };
@@ -76,24 +75,16 @@ let promise = fetch('http://localhost:3000/api/teddies')
                 // ajoute un button et et data-* pour récupérer info pour panier
                 let button = document.createElement('button');
                     button.setAttribute('class', 'btn btn-primary mt-3 mb-3 add-cart');
+                    button.setAttribute('id','btn');
                     button.setAttribute('type','submit');
                     button.setAttribute('data-id', ours[i]._id);
                     button.setAttribute('data-name', ours[i].name);
                     button.setAttribute('data-price', ours[i].price);
                     button.setAttribute('data-url', 'teddyEnJs.html' + '?id=' + ours[i]._id);
-                    button.setAttribute('data-phto', ours[i].imageUrl);
+                    button.setAttribute('data-photo', ours[i].imageUrl);
                     button.innerHTML = 'Ajouter au panier';
                     div.appendChild(button);
-                // quand on click sur button, un message s'affiche et 1 article ajouté au panier
-                // let nombreArticle = document.getElementById('in-cart-items-num');
-                // let s = 0;
-                // button.addEventListener('click', function addCart(e) {
-                //     e.preventDefault();
-                //     alert('1 article a bien ajouté');
-                //     s++;
-                //     nombreArticle.innerHTML = '(' + s +')';
-                // });
-
+                
             }
             // si la référence n'est pas identique que _id; on les affiche en tant que d'autre droduits
             else {
@@ -110,34 +101,88 @@ let promise = fetch('http://localhost:3000/api/teddies')
                     autreTitle.setAttribute('class', 'card-title');
                     autreTitle.innerHTML = ours[i].name;
                     autreProduit.appendChild(autreTitle);
-                // let paragraphe = document.createElement('p');
-                //     paragraphe.setAttribute('class', 'card-text hide p-1');
-                //     paragraphe.innerHTML = "Ajouter au panier";
-                //     autreProduit.appendChild(paragraphe);
-
                 autreArticle.append(autreProduit);
 
             }
-        } 
-
-        /* utiliser localStorage pour stocker les info dans le panier */
-
-        let cart = document.querySelector('.add-cart');
-        
-        cart.addEventListener('click', () =>{
-                 cartNumber();
-                
-                
-            })
-        
-
-         function cartNumber () {
-            localStorage.setItem('cartNumber',1);
-            let productNumber = localStorage.getItem('cartNumber');
-            productNumber.parseInt(productNumber);
-            if(productNumber) { localStorage.setItem('cartNumber', productNumber + 1)}
-            else {localStorage.setItem('cartNumber',1);}
-            document.getElementById('in-cart-items-num').innerHTML = productNumber + 1;
         }
         
+        /* ajouter le fonction pour button au click*/
+        
+            let panier= document.getElementById('btn');
+            // récupérer les informations du produit grâce au data-*
+            var product = {
+                name: panier.getAttribute('data-name'),
+                price: parseInt(panier.getAttribute('data-price')),
+                inCart: 0,
+                photo: panier.getAttribute('data-photo'),
+            }
+            
+            panier.addEventListener('click', addPanier);//fonction quand on click sur le bouton
+            function addPanier (data) {
+                data.preventDefault();
+                cartNumber(product);// fonction pour ajouter le nombre et nom du produit
+                totalCost(product);// fonction pour calculer le total des articles
+            }
+            // function ajouter le nombre de produit, et afficher au panier
+            function cartNumber(product) {
+               let productNumber = parseInt(localStorage.getItem('cartNumber'));
+
+               if(productNumber) { localStorage.setItem('cartNumber', productNumber +1);
+               document.getElementById('in-cart-items-num').innerHTML = productNumber +1;
+                } //s'il y a déjà un produit, on ajoute 1 et affiche le nombre total dans panier
+                else {localStorage.setItem('cartNumber', 1);
+                document.getElementById('in-cart-items-num').innerHTML = 1;} 
+                // si c'est la premiere fois, on ajoute dans le localstorage, panier = 1
+
+                setItem(product); // on ajoute une fonction pour mettre le nom du produit
+            }
+
+            function setItem(product) {
+                let cartItems = localStorage.getItem('productInCart');
+                cartItems = JSON.parse(cartItems);
+                
+                if (cartItems != null) {// à partir du 2eme click,
+                    if (cartItems[product.name] == undefined) { //et il y a d'autre produit
+                        cartItems = { // on ajoute notre nouvel produit
+                            ...cartItems,
+                            [product.name]:product
+                        }
+                    }
+                    cartItems[product.name].inCart +=1 // incrémenter aussi la propriété inCart
+                }
+                    else { // c'est la première fois, on initilise propriété inCart = 1; et ajoute notre fiche produit ( nom, prix, photo...) dans product.name
+                    product.inCart = 1;
+                    cartItems = { [product.name]:product};
+                    }
+                // si c'est la première fois, on ajoute dans localstorage productInCart, la valeur est cartItem
+                localStorage.setItem('productInCart', JSON.stringify(cartItems))
+            }
+
+            // fonction pour actualiser le nombre article dans le panier
+            function onLoadCartNumber() {
+                let productNumber = parseInt(localStorage.getItem('cartNumber'));
+                // vérifier si productNumber existe déjà dans le localStorage et affiche et résultat dans le panier ( pour en cas de refraîche la page)
+                if(productNumber) {document.getElementById('in-cart-items-num').textContent = productNumber;
+                }
+            }
+
+            // on crée un fonction pour calculer le total des articles dans le panier
+            function totalCost(product) {
+                console.log(typeof product.price)
+                let cartCost = localStorage.getItem('totalCost');
+                
+                if (cartCost != null) { //s'il y a déjà du produit, on ajoute le prix du produit dans le total
+                cartCost = parseInt(cartCost);
+
+                localStorage.setItem('totalCost', cartCost + product.price)
+                }
+                else { // si c'est la première fois, le total est le prix de produit
+                    localStorage.setItem('totalCost', product.price)
+                }
+            }
+        
+        onLoadCartNumber()
+        
+
     }
+    
