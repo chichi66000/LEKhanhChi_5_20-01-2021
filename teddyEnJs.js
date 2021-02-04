@@ -115,6 +115,8 @@ let promise = fetch('http://localhost:3000/api/teddies')
                 price: parseInt(panier.getAttribute('data-price')),
                 inCart: 0,
                 photo: panier.getAttribute('data-photo'),
+                id: panier.getAttribute('data-id'),
+                total:0,
             }
             
             panier.addEventListener('click', addPanier);//fonction quand on click sur le bouton
@@ -168,7 +170,7 @@ let promise = fetch('http://localhost:3000/api/teddies')
 
             // on crée un fonction pour calculer le total des articles dans le panier
             function totalCost(product) {
-                console.log(typeof product.price)
+                // console.log(typeof product.price)
                 let cartCost = localStorage.getItem('totalCost');
                 
                 if (cartCost != null) { //s'il y a déjà du produit, on ajoute le prix du produit dans le total
