@@ -75,66 +75,82 @@
 
 displayCart();
 
-
-let cart = localStorage.getItem('productInCart');//saisir les produits dans localStorage
-cart = JSON.parse(cart);
-let tab = Object.values(cart); // convertir ses valeurs en tableau des objects
-
 function addition (item) { // ajouter 1 quand on click sur + et mise à jour localStorage
         
-    let cart = localStorage.getItem('productInCart');
+    let cart = localStorage.getItem('productInCart');// saisir localStorage
     cart= JSON.parse(cart);
-    cart[item.name]['inCart'] +=1;
-    localStorage.setItem('productInCart', JSON.stringify(cart));
+    cart[item.name]['inCart'] +=1;// ajouter +1 quand on click;
+    localStorage.setItem('productInCart', JSON.stringify(cart)); // enregistrer nouvelle valeur
+
+    let tab = Object.values(cart) // saisir à nouveau localStorage et convertir en tableau
+
+    let quantity = document.querySelectorAll('.quantity'); //accéder aux HTML pour afficher
+    let somme = document.querySelectorAll('.somme');
+    let panier = document.getElementById('in-cart-items-num');
+    let sousTotal = document.getElementById('tfoot');
+    let totalProduit= document.querySelector('.totalProduit');
 
     
-    updatetotalCost()
-    updatecartNumber ()
-   
+    let panierTotal = 0;
+    let sum = 0;
+
+    for ( let i=0; i<tab.length; i++) {
+        tab[i].total = tab[i].inCart * tab[i].price;//ajouter la somme total dans chaque produit
+        panierTotal +=tab[i].inCart; // faire addition de tous les sommes total de chaque produit
+
+
+        panier.innerHTML = panierTotal;
+        localStorage.setItem('cartNumber', JSON.stringify(panierTotal)) // enregistrer la valeur
+
+        sum += tab[i].total;
+        localStorage.setItem('totalCost', JSON.stringify(sum));// enregistrer la valeur
+
+        quantity[i].innerHTML = tab[i].inCart; // afficher le résultat dans HTML
+        somme[i].innerHTML = tab[i].total;
+        sousTotal.innerHTML = sum;
+        totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
+
+    } 
 }
 
+// répéter la même opération que fonction addition
 function soustraction (item) {//enlever 1 quand on click sur - et mise à jour localStorage
     let cart = localStorage.getItem('productInCart');
     cart= JSON.parse(cart);
     cart[item.name]['inCart'] -=1;
     localStorage.setItem('productInCart', JSON.stringify(cart));
 
-    
-    updatetotalCost()
-    updatecartNumber ()
+    let tab = Object.values(cart)
 
-}
-
-function updatetotalCost() {// mise à jour la valeur total pour ensemble des produits
-    let s=0; 
-    for(let i=0; i<tab.length; i++) {
-        tab[i].total= tab[i].price * tab[i].inCart;
-        
-        s += tab[i].total;
-    }
-    localStorage.setItem('totalCost', JSON.stringify(s));
-    let sousTotal = document.getElementById('tfoot');
-    let somme = localStorage.getItem('totalCost');
-    somme= JSON.parse(somme);
-    sousTotal.innerHTML = somme;
-}
-
-function updatecartNumber () {
-    let x=0; 
-    for(let i=0; i<tab.length; i++) {
-        x += tab[i].inCart
-    }
-    localStorage.setItem('cartNumber', JSON.stringify(x));
-    let sum = JSON.parse(localStorage.getItem('cartNumber'));
-    
+    let quantity = document.querySelectorAll('.quantity');
+    let somme = document.querySelectorAll('.somme');
     let panier = document.getElementById('in-cart-items-num');
-    panier.innerHTML= sum;
+    let sousTotal = document.getElementById('tfoot');
+    let totalProduit= document.querySelector('.totalProduit');
+
+    let panierTotal = 0;
+    let sum = 0;
+
+    for ( let i=0; i<tab.length; i++) {
+        tab[i].total = tab[i].inCart * tab[i].price;
+        panierTotal +=tab[i].inCart;
+
+        localStorage.setItem('cartNumber', JSON.stringify(panierTotal))
+
+        sum += tab[i].total;
+        localStorage.setItem('totalCost', JSON.stringify(sum));
+
+        quantity[i].innerHTML = tab[i].inCart;
+        somme[i].innerHTML = tab[i].total;
+        panier.innerHTML = panierTotal;
+        sousTotal.innerHTML = sum;
+        totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
+
+    }
 }
 
-updatetotalCost()
-updatecartNumber ()
-
-
+let totalProduit= document.querySelector('.totalProduit');
+totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
 
 
     
