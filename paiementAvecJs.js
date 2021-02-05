@@ -74,6 +74,15 @@
 }   
 
 displayCart();
+updatePanier ();
+
+function updatePanier () {
+    let totalCost = parseInt(localStorage.getItem('totalCost'));
+    let cartNumber = parseInt(localStorage.getItem('cartNumber'));
+    let totalProduit= document.querySelector('.totalProduit'); 
+    totalProduit.innerHTML = totalCost;// afficher le total des produits quand la page se rafraichir;  
+    document.getElementById('in-cart-items-num').innerHTML = cartNumber;
+}
 
 function addition (item) { // ajouter 1 quand on click sur + et mise à jour localStorage
         
@@ -89,7 +98,7 @@ function addition (item) { // ajouter 1 quand on click sur + et mise à jour loc
     let panier = document.getElementById('in-cart-items-num');
     let sousTotal = document.getElementById('tfoot');
     let totalProduit= document.querySelector('.totalProduit');
-
+    // let prixApayer = document.querySelector('.prixApayer');
     
     let panierTotal = 0;
     let sum = 0;
@@ -104,12 +113,13 @@ function addition (item) { // ajouter 1 quand on click sur + et mise à jour loc
 
         sum += tab[i].total;
         localStorage.setItem('totalCost', JSON.stringify(sum));// enregistrer la valeur
+        localStorage.setItem('TOTAL', JSON.stringify(sum));
 
         quantity[i].innerHTML = tab[i].inCart; // afficher le résultat dans HTML
         somme[i].innerHTML = tab[i].total;
         sousTotal.innerHTML = sum;
         totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
-
+        // prixApayer.innerHTML= JSON.parse(localStorage.getItem('TOTAL'));
     } 
 }
 
@@ -139,18 +149,118 @@ function soustraction (item) {//enlever 1 quand on click sur - et mise à jour l
 
         sum += tab[i].total;
         localStorage.setItem('totalCost', JSON.stringify(sum));
+        localStorage.setItem('TOTAL', JSON.stringify(sum));
+
 
         quantity[i].innerHTML = tab[i].inCart;
         somme[i].innerHTML = tab[i].total;
         panier.innerHTML = panierTotal;
         sousTotal.innerHTML = sum;
         totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
-
     }
 }
 
-let totalProduit= document.querySelector('.totalProduit');
-totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
+
+//Changer le prix de livraison selon le nombre d'articles dans le panier et le mode livraison
+let prixChrono = document.querySelector('.prixChrono');
+let prixColis = document.querySelector('.prixColis');
+let totalLivraison = document.querySelector('.totalLivraison');
+
+let choixRatio = document.querySelector('.choixRatio');
+let inputChrono = document.getElementById("btnRatio1");
+let inputColis = document.getElementById("btnRatio2");
+
+inputChrono.addEventListener('change', ()=> { // quand le Chronopost est choisi, on affiche le prix selon la quantity et Charger le prix de livraison dans la zone TOTAL
+    
+    let allArticle = JSON.parse(localStorage.getItem('cartNumber'));
+     
+    if( inputChrono.checked==false) {prixChrono.innerHTML = ""; }
+    else if( inputChrono.checked && allArticle<=3) {
+        prixChrono.innerHTML = 29 ;
+        prixColis.innerHTML="";
+        totalLivraison.innerHTML = 29;
+        localStorage.setItem('livraison', 29);
+    } 
+    else if( inputChrono.checked && allArticle>3 && allArticle<=6) {
+            prixChrono.innerHTML = 33 ;
+            prixColis.innerHTML="";
+            totalLivraison.innerHTML = 33;
+            localStorage.setItem('livraison', 33);
+    }
+
+    else {  prixChrono.innerHTML = 39;
+            prixColis.innerHTML="";
+            totalLivraison.innerHTML = 39;
+            localStorage.setItem('livraison', 39);
+    }
+    prixTOTAL();
+})
+ 
+inputColis.addEventListener('change', ()=> { // quand le Chronopost est choisi, on affiche le prix selon la quantity
+    let allArticle = JSON.parse(localStorage.getItem('cartNumber'));
+
+    if( inputColis.checked==false) {prixColis.innerHTML = ""; }
+    else if( inputColis.checked && allArticle<=3) {
+            prixColis.innerHTML = 7 ;
+            prixChrono.innerHTML ="";
+            totalLivraison.innerHTML = 7;
+            localStorage.setItem('livraison', 7);
+
+    } 
+    else if( inputColis.checked && allArticle>3 && allArticle<=6) {
+            prixColis.innerHTML = 9 ;
+            prixChrono.innerHTML ="";
+            totalLivraison.innerHTML = 9;
+            localStorage.setItem('livraison', 9);
+
+    }
+    else {  prixColis.innerHTML = 15;
+            prixChrono.innerHTML ="";
+            totalLivraison.innerHTML = 15;
+            localStorage.setItem('livraison', 15);
+    }
+    prixTOTAL();
+})
+
+function prixTOTAL() {//calculer le prix à payer: produit + livraison
+    let livraison = JSON.parse(localStorage.getItem('livraison'));
+    let totalCost = JSON.parse(localStorage.getItem('totalCost'));
+    let TOTAL = livraison + totalCost;
+    localStorage.setItem('TOTAL', JSON.stringify(TOTAL));
+    let prixApayer = document.querySelector('.prixApayer');
+    prixApayer.innerHTML = JSON.parse(localStorage.getItem('TOTAL'));
+}
+
+let prixApayer = document.querySelector('.prixApayer');
+prixApayer.addEventListener('load', function hide() { // afficher le montant TOTAL seulement quand le mode de livraison est choisi
+
+    if( inputColis.checked == false && inputChrono.checked == false ) {
+        totalLivraison.innerHTML = "";
+    }
+})
+
+// Valider la commande et passer à la formulaire de contact
+
+let valideCommande = document.querySelector('.valideCommande');
+valideCommande.addEventListener('click', (event) => {
+    
+    if(inputColis.checked == false && inputChrono.checked == false) {//si on n'a pas choisir le mode de livraison
+        alert('Veuillez choisir un mode de livraison')
+    }
+    else if(inputColis.checked || inputChrono.checked ) { // s'il y a le mode de livraison, on vérifie ensuite pour option de paiement
+        let creditCard = document.querySelectorAll('.creditCard');
+        let optionCC = document.querySelector('.optionCC');
+        for (let i=0; i<creditCard.length; i++) {
+            if(creditCard[i].checked) { return true;
+               }
+            else{alert("Veuillez choisir un mode de paiement");}
+        }
+    }
+    event.href='formulaire_contact.html' // si tout est ok; aller sur la page de formulaire_contact
+})
+
+
+
 
 
     
