@@ -98,18 +98,18 @@
                                 <th>Prix</th>
                             </tr>
                         </thead>
-                        <tboby>
+                        <tboby class="choixRatio">
                             <tr>
-                                <td><input type="radio" name="checked" class="input-group-item"></td>
+                                <td><input type="radio" name="choix" id="btnRatio1" class="input-group-item"></td>
                                 <td>Chronopost</td>
                                 <td>Livraison sous 24h</td>
-                                <td>6.5</td>
+                                <td class="prixChrono"></td>
                             </tr>
                             <tr>
-                                <td><input type="radio" name="checked" class="input-group-item"></td>
+                                <td><input type="radio" name="choix" id="btnRatio2" class=" input-group-item"></td>
                                 <td>Colissimo</td>
                                 <td>Livraison sous 2-3jours</td>
-                                <td>4.5</td>
+                                <td class="prixColis"></td>
                             </tr>
                         </tboby>
                     </table>
@@ -117,32 +117,32 @@
 
                 <div class=" mt-4 mb-4">
                     <h4 class="text-danger">Mode de paiement</h4>
-                    <div class="">
-                        <input type="radio" name="c-credit" class="input-group-item"><i class="fab fa-cc-visa m-1"></i>
-                        <input type="radio" name="c-credit" class="input-group-item"><i class="fab fa-cc-amex m-"></i>
-                        <input type="radio" name="c-credit" class="input-group-item"><i class="fab fa-cc-mastercard m-1"></i>
-                        <input type="radio" name="c-credit" class="input-group-item"><i class="fab fa-cc-paypal m-1"></i>
+                    <div class="optionCC">
+                        <input type="radio" name="c-credit" class="input-group-item creditCard"><i class="fab fa-cc-visa m-1"></i>
+                        <input type="radio" name="c-credit" class="input-group-item creditCard"><i class="fab fa-cc-amex m-"></i>
+                        <input type="radio" name="c-credit" class="input-group-item creditCard"><i class="fab fa-cc-mastercard m-1"></i>
+                        <input type="radio" name="c-credit" class="input-group-item creditCard"><i class="fab fa-cc-paypal m-1"></i>
                     </div>
                 </div>
 
             </div>
 
             <div class="col-md-3 border d-flex flex-column flex-start h-100">
-                <div class="d-flex flex-row">
+                <div class="row d-flex flex-row">
                     <p class="col">Produit</p>
-                    <p class=" col-1 fw-bold"></p>
+                    <p class="col totalProduit  fw-bold flex-end"></p>
                 </div>
-                <div class="d-flex flex-row">
+                <div class="row d-flex flex-row">
                     <p class="col">Livraison</p>
-                    <p class="col-1"></p>
+                    <p class="col totalLivraison fw-bold flex-end"></p>
                 </div>
                 <hr>
-                <div class="d-flex flex-row">
+                <div class="row d-flex flex-row">
                     <p class="col fw-bold">TOTAL</p>
-                    <p class=" col-1 fw-bold"></p>
+                    <p class="prixApayer col fw-bold flex-end"></p>
                 </div>
                 <div class="text-center mt-4 mb-4">
-                    <button class="btn btn-primary" type="submit">Valider ma commande</button>
+                    <button class="btn btn-primary valideCommande" type="submit" href="">Valider ma commande</button>
                 </div>
             </div>
 
