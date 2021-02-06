@@ -41,7 +41,10 @@
                                         <br>Mon compte</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> <br>Panier</a>
+                                    <a class="nav-link panier" href="paiementFaitAvecJS.html"><i class="fas fa-shopping-cart"></i>
+                                        <br>Panier  <span id="in-cart-items-num"> </span>
+                                        
+                                    </a>
                                 </li>
                             </ul>
     
@@ -59,69 +62,69 @@
             <form class="form-inline needs_validation" id="formulaire">
                 <div class="form-group mb-4 mt-4">
                     <label for="nom" class="w-25 text-right">Nom</label>
-                        <input type="text" id="nom" class="" required>
+                        <input type="text" id="nom" name="nom" class="" required>
                         <div class="valid-feedback">Ok !</div>
                         <div class="invalid-feedback">Valeur incorrecte</div>
                 </div>
 
                 <div class="form-group mb-4">
                     <label for="prenom" class="w-25 text-right">Prénom</label>
-                        <input type="text" id="prenom" class="" required>
+                        <input type="text" id="prenom" name="prenom" class="" required>
                         <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                 </div>
 
                 <div class="form-group mb-4">
                     <label for="email" class="w-25 text-right">Email</label>
-                        <input type="email" id="email" class="" required>
+                        <input type="email" id="email" name="email" class="" required>
                         <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                 </div>
 
                 <div class="form-group mb-4">
                     <label for="tel" class="w-25 text-right">Téléphone</label>
-                        <input type="tel" id="tel" class="" required>
+                        <input type="tel" id="tel" name="telephone" class="" required>
                         <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                 </div>
 
                 <div class="form-group mb-4">
                     <label for="adresse" class="w-25 text-right">Adresse</label>
-                        <input type="text" id="adresse" class="" required>
+                        <input type="text" id="adresse" name="adresse" class="" required>
                         <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                 </div>
 
                 <div class="form-group mb-4">
                     <label for="adresse" class="w-25 text-right">Ville</label>
-                        <input type="text" id="ville" class="" required>
+                        <input type="text" id="ville" name="ville" class="" required>
                         <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                 </div>
                 
                 <div class="form-group mb-4">
                     <label for="adresse" class="w-25 text-right">Code postal</label>
-                        <input type="text" id="codePostal" class="" required>
+                        <input type="text" id="codePostal" name="codePostal" class="" required>
                         <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                 </div>
 
                 <div class="form-group mb-4">
                     <label for="adresse" class="w-25 text-right">Pays</label>
-                        <input type="text" id="pays" class="" required>
+                        <input type="text" id="pays" name="pays" class="" required>
                         <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                 </div>
 
                 <div class="form-group mb-4">
-                        <input class="form-check-input" type="checkbox" value="" id="cgu" required>
-                        <label for="cgu" class="form-check-label">J'accepte les conditions générales d'utilisation et de vente</label>
+                        <input class="form-check-input" type="checkbox" name="ratio" value="" id="cgu" required>
+                        <label for="cgu" name="CGU" class="form-check-label">J'accepte les conditions générales d'utilisation et de vente</label>
                         
                         <div class="invalid-feedback">Vous devez accepter les CGU pour continuer</div>
                    
                 </div>
                 
-                <button class="btn btn-primary" type="submit" id="btn-submit">Envoyer</button>
+                <button class="btn btn-primary" name="submit" value="submit" type="submit" id="btn-submit">Envoyer</button>
                 
             </form>
         </div>
@@ -154,7 +157,6 @@
 
 </div>
         <script src="testjs_formulaire.js"></script>
-        <script src="bootstrap/bootstrap.min.css"></script>
         <script src="bootstrap/bootstrap.min.js"></script>
 </body>
 </html>
