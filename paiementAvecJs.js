@@ -256,7 +256,7 @@ valideCommande.addEventListener('click', (event) => {
             else{alert("Veuillez choisir un mode de paiement");}
         }
     }
-    event.href='formulaire_contact.html' // si tout est ok; aller sur la page de formulaire_contact
+    else {event.href='formulaire_contact.html' }// si tout est ok; aller sur la page de formulaire_contact
 })
 
 
