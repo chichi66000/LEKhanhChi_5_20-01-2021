@@ -72,10 +72,10 @@ border:none;
     }
   
 }
-@media screen and (max-width:400px) {
+/* @media screen and (max-width:400px) {
     .produit_paiement{
         display:none;
         
     }
     
-}
+} */
