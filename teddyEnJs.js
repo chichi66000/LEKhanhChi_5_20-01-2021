@@ -97,7 +97,7 @@ let promise = fetch('http://localhost:3000/api/teddies')
                     autrePhoto.setAttribute('src', ours[i].imageUrl);
                     autrePhoto.setAttribute('alt', ours[i].name);
                     autreProduit.appendChild(autrePhoto);
-                let autreTitle = document.createElement('h3');
+                let autreTitle = document.createElement('h6');
                     autreTitle.setAttribute('class', 'card-title');
                     autreTitle.innerHTML = ours[i].name;
                     autreProduit.appendChild(autreTitle);
