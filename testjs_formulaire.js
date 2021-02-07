@@ -67,11 +67,26 @@ updatePanier ()
                     formData.append(formulaire[i].name, formulaire[i].value)// ajouter les valeurs du formulaire dans formData;
                 }
 
+                // Récupérer que id et nombre article pour POST au serveur
+                let produitData = JSON.parse(localStorage.getItem('productInCart'));
+                produitData = Object.values(produitData);
+                    for ( let i=0; i< produitData.length;i++) {
+                        let postDataP= {
+                            inCart: produitData[i].inCart,
+                            id: produitData[i].id
+                        };
+                        postDataP = JSON.stringify(postDataP);
+                        formData.append('produit',postDataP)
+                    }
+                
+                // Récupérer le numéro suivi de commande; date et mode de paiement pour POST au serveur
+                let dateData = JSON.stringify(localStorage.getItem('datecommande'));
+                let cardData = JSON.stringify(localStorage.getItem('choixpaiement'));
+                let ncommandeData = JSON.stringify(localStorage.getItem('numeroCommande'))
+                formData.append('date', dateData);
+                formData.append('card',cardData);
+
                 let formDataJson = JSON.stringify(formData);
-
-                let articleAchete = JSON.stringify(localStorage.getItem('productInCart'));
-                formData.append('json', articleAchete) // ajouter les produits acheté dans formData;
-
 
                 let optionFetch = {
                     method: 'POST',
@@ -84,10 +99,10 @@ updatePanier ()
                     let messageErreur = response.text;
                     throw new Error(messageErreur);
                 }
-                e.href = "confirmationJs.html";
+                
             }
         })
 
    
-
+        
 
