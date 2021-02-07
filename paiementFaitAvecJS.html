@@ -31,17 +31,17 @@
                             <li class="navbar-item align-self-end">
                                 <a class="nav-link " href="index.html">Accueil</a>
                             </li>
-                            <li class="navbar-item">
+                            <li class="navbar-item align-self-end">
                                 <a class="nav-link" href="#"><i class="fas fa-heart"></i>
-                                <br>Mes préféré</a>
+                                </a>
                             </li>
-                            <li class="navbar-item">
+                            <li class="navbar-item align-self-end">
                                 <a class="nav-link" href="#"><i class="fas fa-user-alt"></i>
-                                    <br>Mon compte</a>
+                                    </a>
                             </li>
-                            <li class="navbar-item">
+                            <li class="navbar-item align-self-end">
                                 <a class="nav-link panier" href="paiementFaitAvecJS.html"><i class="fas fa-shopping-cart"></i>
-                                    <br>Panier  <span id="in-cart-items-num"> </span>
+                                    <span id="in-cart-items-num"> </span>
                                     
                                 </a>
                             </li>
@@ -117,12 +117,24 @@
 
                 <div class=" mt-4 mb-4">
                     <h4 class="text-danger">Mode de paiement</h4>
-                    <div class="optionCC">
-                        <input type="radio" name="visa" class="input-group-item creditCard"><i class="fab fa-cc-visa m-1"></i>
-                        <input type="radio" name="amex" class="input-group-item creditCard"><i class="fab fa-cc-amex m-"></i>
-                        <input type="radio" name="master" class="input-group-item creditCard"><i class="fab fa-cc-mastercard m-1"></i>
-                        <input type="radio" name="paypal" class="input-group-item creditCard"><i class="fab fa-cc-paypal m-1"></i>
-                    </div>
+                    <form class="btnRadio" >
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="inputRadio" id="visa" class="form-check-input creditCard" value="visa">
+                                <label class="form-check-label" for="visa" ><i class="fab fa-cc-visa m-1"></i></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="inputRadio" id="amex" class="form-check-input creditCard" value="amex">
+                                <label class="form-check-label"  for="amex"><i class="fab fa-cc-amex m-"></i></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="inputRadio" id="master" class="form-check-input creditCard" value="master">
+                                <label class="form-check-label" for="master"><i class="fab fa-cc-mastercard m-1"></i></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="inputRadio" id="paypal" class="form-check-input creditCard" value="paypal">
+                                <label class="form-check-label" for="paypal"><i class="fab fa-cc-paypal m-1"></i></label>
+                        </div> 
+                    </form>
                 </div>
 
             </div>
@@ -142,13 +154,38 @@
                     <p class="prixApayer col fw-bold flex-end"></p>
                 </div>
                 <div class="text-center mt-4 mb-4">
-                    <button class="btn btn-primary valideCommande" type="submit" href="">Valider ma commande</button>
+                    <a class="btn btn-primary valideCommande" type="submit" href="formulaire_contact.html">Valider ma commande</a>
                 </div>
             </div>
 
         </div>
 
+        <!-- fin bloc 1 -->
 
+        <!-- bloc footer -->
+        <footer class="container-fluid bg-light ">
+            <div class="row w-50 m-auto pt-4">
+                <a class="col-3" href="https://twitter.com"><i class="fab fa-twitter social"></i></a>
+                <a class="col-3" href="https://facebook.fr"><i class="fab fa-facebook social"></i></a>	
+                <a class="col-3" href="https://dribbble.com/"><i class="fab fa-dribbble social"></i></a>
+                <a class="col-3" href="https://www.instagram.com"><i class="fab fa-instagram social"></i></a>
+                <h6 class="col text-center text-danger mt-4 mb-4 fs-6 text-uppercase text-justify">Rejoinez la communauté</h6>
+            </div>
+            <hr>
+            <div class="row mb-4">
+                <div class="col-12 col-sm-6 list-group list-group-flush m-auto  px-4 ">
+                    <a class="list-group-item" href="#">FAQ</a>
+                    <a class="list-group-item" href="#">Contactez nous</a>
+                    <a class="list-group-item" href="#">Notre partenaire</a>
+                </div>
+                <div class="col-12 col-sm-6 list-group list-group-flush m-auto px-4 ">
+                    <a class="list-group-item" href="#">Conditions générales de vente</a>
+                    <a class="list-group-item" href="#">Programme de fidélité</a>
+                    <a class="list-group-item" href="#">Politique confidentialité</a>
+                </div>
+            </div>
+        </footer>
+        <!-- fin bloc footer -->
     </div>
 
     <script src="paiementAvecJs.js"></script>
