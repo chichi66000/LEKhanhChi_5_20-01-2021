@@ -1,9 +1,9 @@
 
-
+/* récuperer le montant total dans locastorage pour afficher dans le tableau => montant*/
 let TOTAL = localStorage.getItem('TOTAL');
 TOTAL = parseInt(TOTAL);
 
-let recapitulatif = document.getElementById('recapitulatif');
+let recapitulatif = document.getElementById('recapitulatif'); 
 
 let tr1 = document.createElement('tr');
 
@@ -13,7 +13,8 @@ let td1 = document.createElement('td');
 
 let nCommande = document.createElement('td');
     nCommande.setAttribute('class', 'text-right');
-    // nCommande.innerHTML;
+    let numeroCommande = localStorage.getItem('numeroCommande');
+     nCommande.innerHTML = numeroCommande;
     tr1.append(nCommande);
 
 let tr2 = document.createElement('tr');
@@ -23,12 +24,40 @@ let td2 = document.createElement('td');
     tr2.append(td2);
 
 let montant = document.createElement('td'); // recuperer le montant total du commande
+    montant.setAttribute('class', 'text-right');
     montant.innerHTML = TOTAL;
     tr2.append(montant);
 
-// let tr3 = document.createElement('tr'); essayer de récuperer le mode de paiement
+let tr3 = document.createElement('tr');// récuperer le mode de paiement
+
+let td3 = document.createElement('td');
+    td3.innerHTML = "Payé avec: ";
+    tr3.append(td3);
+
+let carte = document.createElement('td'); // recuperer le montant total du commande
+    carte.setAttribute('class', 'text-right');
+    let cc= localStorage.getItem('choixpaiement')
+    carte.innerHTML = cc;
+    tr3.append(carte);
+
+let date = document.createElement('tr') // récupérer date de commande
+
+let td4 = document.createElement('td');
+    td4.innerHTML = "Commande passé le: ";
+    date.append(td4);
+
+let date1 = document.createElement('td'); 
+    date1.setAttribute('class', 'text-right');
+    let date2= localStorage.getItem('datecommande')
+    date1.innerHTML = date2;
+    date.append(date1);
+
 recapitulatif.append(tr1)
 recapitulatif.append(tr2)
+recapitulatif.append(tr3)
+recapitulatif.append(date)
+
+
 
 // Récupérer info du produit, prix, date livraison...
 let productInCart = JSON.parse(localStorage.getItem('productInCart'));
