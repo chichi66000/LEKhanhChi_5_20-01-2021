@@ -1,3 +1,4 @@
+
 a{
     text-decoration:none!important;
 }
@@ -5,6 +6,9 @@ a:hover ,
 a:focus {
     color: darkblue!important;
 }
+/* img{
+    object-fit: contain!important;
+} */
 
 /*style pour page accueil */
 .fab{
@@ -18,7 +22,9 @@ a.list-group-item{
 background-color:#f8f9fa!important;
 border:none;
 }
-
+.disabled {
+    opacity: 0.5;
+}
 /* style pour page produit */
 .hide{
     opacity:0;
@@ -38,7 +44,7 @@ border:none;
 }
 /* style pour panier*/
 .choix_en_plus{
-    height: 16rem;
+    height: 13rem;
 }
 
 /* style pour page paiement */
@@ -51,13 +57,15 @@ border:none;
     text-align:right!important;
 }
 @media screen and (min-width: 576px) and (max-width:767px) {
-    i.fas {
-        display:none;
-        width:0;
-        height:0;
-    }
+   
     .navbar-item{
         align-self:flex-end;
+    }
+    .social {
+        font-size: 1rem;
+    }
+    .choix_en_plus{
+        height: 14rem;
     }
 }
 
@@ -65,17 +73,34 @@ border:none;
     .choix_en_plus{
         height: 16 rem;
     }
-    i.fas {
-        display:none;
-        width:0;
-        height:0;
+    .social {
+        font-size: 1rem;
     }
+   html{
+       width:90%;
+       margin:auto;
+   }
+   .produit{
+    height: 20rem
+}
+.choix_en_plus{
+    height: 10rem;
+}
   
 }
-/* @media screen and (max-width:400px) {
-    .produit_paiement{
-        display:none;
-        
+@media screen and (max-width:400px) {
+   .social {
+       font-size: 1rem;
+   }
+   html{
+    width:90%;
+    margin:auto;
+    }
+    .produit{
+        height: 25rem
+    }
+    .choix_en_plus{
+        height: 10rem;
     }
     
-} */
+}
