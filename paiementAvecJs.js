@@ -98,7 +98,7 @@ function addition (item) { // ajouter 1 quand on click sur + et mise à jour loc
     let panier = document.getElementById('in-cart-items-num');
     let sousTotal = document.getElementById('tfoot');
     let totalProduit= document.querySelector('.totalProduit');
-    // let prixApayer = document.querySelector('.prixApayer');
+    let prixApayer = document.querySelector('.prixApayer');
     
     let panierTotal = 0;
     let sum = 0;
@@ -119,7 +119,11 @@ function addition (item) { // ajouter 1 quand on click sur + et mise à jour loc
         somme[i].innerHTML = tab[i].total;
         sousTotal.innerHTML = sum;
         totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
-        // prixApayer.innerHTML= JSON.parse(localStorage.getItem('TOTAL'));
+        if(inputChrono.checked==false && inputColis.checked== false) {
+            prixApayer.innerHTML= JSON.parse(localStorage.getItem('TOTAL'));
+        }
+        if(inputChrono.checked || inputColis.checked ) { prixApayer.innerHTML= parseInt(localStorage.getItem('TOTAL')) + parseInt(localStorage.getItem('livraison'));}
+        
     } 
 }
 
@@ -137,6 +141,8 @@ function soustraction (item) {//enlever 1 quand on click sur - et mise à jour l
     let panier = document.getElementById('in-cart-items-num');
     let sousTotal = document.getElementById('tfoot');
     let totalProduit= document.querySelector('.totalProduit');
+    let prixApayer = document.querySelector('.prixApayer');
+
 
     let panierTotal = 0;
     let sum = 0;
@@ -151,12 +157,15 @@ function soustraction (item) {//enlever 1 quand on click sur - et mise à jour l
         localStorage.setItem('totalCost', JSON.stringify(sum));
         localStorage.setItem('TOTAL', JSON.stringify(sum));
 
-
         quantity[i].innerHTML = tab[i].inCart;
         somme[i].innerHTML = tab[i].total;
         panier.innerHTML = panierTotal;
         sousTotal.innerHTML = sum;
         totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
+        if(inputChrono.checked==false && inputColis.checked== false) {
+            prixApayer.innerHTML= JSON.parse(localStorage.getItem('TOTAL'));
+        }
+        if(inputChrono.checked || inputColis.checked ) { prixApayer.innerHTML= parseInt(localStorage.getItem('TOTAL')) + parseInt(localStorage.getItem('livraison'));}
     }
 }
 
@@ -231,37 +240,56 @@ function prixTOTAL() {//calculer le prix à payer: produit + livraison
     prixApayer.innerHTML = JSON.parse(localStorage.getItem('TOTAL'));
 }
 
-let prixApayer = document.querySelector('.prixApayer');
-prixApayer.addEventListener('load', function hide() { // afficher le montant TOTAL seulement quand le mode de livraison est choisi
-
-    if( inputColis.checked == false && inputChrono.checked == false ) {
-        totalLivraison.innerHTML = "";
-    }
-})
 
 // Valider la commande et passer à la formulaire de contact
 
 let valideCommande = document.querySelector('.valideCommande');
-valideCommande.addEventListener('click', (event) => {
+valideCommande.addEventListener('click', (e) => {
     
     if(inputColis.checked == false && inputChrono.checked == false) {//si on n'a pas choisir le mode de livraison
-        alert('Veuillez choisir un mode de livraison')
+        alert('Veuillez choisir un mode de livraison');
+        e.preventDefault();
     }
-    else if(inputColis.checked || inputChrono.checked ) { // s'il y a le mode de livraison, on vérifie ensuite pour option de paiement
-        let creditCard = document.querySelectorAll('.creditCard');
-        let optionCC = document.querySelector('.optionCC');
-        for (let i=0; i<creditCard.length; i++) {
-            if(creditCard[i].checked) { return true;
-               }
-            else{alert("Veuillez choisir un mode de paiement");}
-        }
+    else if(!creditCard ()) {// on vérifie ensuite le mode de paiement
+        alert('Veuillez choisir un mode de paiement');
+        e.preventDefault();
     }
-    else {event.href='formulaire_contact.html' }// si tout est ok; aller sur la page de formulaire_contact
+    else {  datecommande(); // stocker la date passé le commande
+            creditCard ();// stocker le mode de paiement
+            generate(); // générer un numéro de suivi commande 
+           }// si tout est ok; aller sur la page de formulaire_contact
 })
 
 
+/* Stocker la date passé de commande dans localStorage*/
+function datecommande() {
+    let date = new Date();
+let datecommande = date.toLocaleString('fr-FR', {
+    weekday:'long',
+    day:'numeric',
+    month:'numeric',
+    year: 'numeric'
+})
+localStorage.setItem('datecommande', datecommande);
+}
 
+/* stocker le mode de paiment dans localStorage*/
 
+   let choixpaiement = document.querySelector('.btnRadio');
+    choixpaiement.addEventListener('change', creditCard) 
+    function creditCard () {
+    let creditCard = document.getElementsByName('inputRadio');
+    let valueCC = "";
+    for ( let i= 0; i<creditCard.length ; i++) {
+        if( creditCard[i].checked) {valueCC = creditCard[i].value}
+    } 
+    localStorage.setItem('choixpaiement', valueCC);
+    return valueCC
+}
 
-    
-    
+/* Générer un numéro de commande et stocker dans localStorage quand on click sur button valider commande*/
+function generate() {
+    let numeroCommande = Math.floor((1 + Math.random()) * 0x10000);
+    localStorage.setItem('numeroCommande', numeroCommande)
+}
+
