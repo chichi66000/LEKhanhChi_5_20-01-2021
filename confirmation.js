@@ -1,5 +1,8 @@
 
-/* récuperer le montant total dans locastorage pour afficher dans le tableau => montant*/
+
+/* récuperer le montant total dans locastorage pour afficher dans 1er partie du tableau*/
+
+
 let TOTAL = localStorage.getItem('TOTAL');
 TOTAL = parseInt(TOTAL);
 
@@ -13,8 +16,8 @@ let td1 = document.createElement('td');
 
 let nCommande = document.createElement('td');
     nCommande.setAttribute('class', 'text-right');
-    let numeroCommande = localStorage.getItem('numeroCommande');
-     nCommande.innerHTML = numeroCommande;
+    let orderId = localStorage.getItem('orderId');
+    nCommande.innerHTML = orderId;
     tr1.append(nCommande);
 
 let tr2 = document.createElement('tr');
@@ -59,10 +62,9 @@ recapitulatif.append(date)
 
 
 
-// Récupérer info du produit, prix, date livraison...
+// Récupérer info du produit, prix, date livraison... our 2eme tableau 
 let productInCart = JSON.parse(localStorage.getItem('productInCart'));
-// productInCart = JSON.parse(productInCart);
-// productInCart = Object.values(productInCart);
+
 
 let info_product = document.getElementById('info_product');
 
@@ -95,9 +97,6 @@ if (productInCart && info_product ) {
             tr4.append(total);
 
             info_product.append(tr4);
-
-
-
     })
 }
 
@@ -117,6 +116,8 @@ let tr5 = document.createElement('tr');
         tr5.append(soustotal1);
 info_TOTAL.append(tr5)
 
+// effacer le localStorage qu'une fois on a fini.
+localStorage.clear();
 
 
 
