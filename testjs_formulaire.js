@@ -91,7 +91,7 @@ updatePanier ()
                 response.then( async (data) => {
                     try{ let info = await data.json();
                     localStorage.setItem('orderId', info.orderId);// récupérer orderID reçu du serveur et stocker
-                    window.location.href = 'confirmationJS.html';// aller sur la page de confirmation quand tout ok
+                    window.location.href = 'confirmationJs.html';// aller sur la page de confirmation quand tout ok
 
                     }catch(error){ alert('erreur' + error)}
                 })
