@@ -59,50 +59,48 @@ updatePanier ()
             else if ( pays_validation.test (pays.value) == false) { e.preventDefault (); e.stopPropagation (); alert("pays: incorrect");}
         
             else { 
-                let headers = new Headers();
-                headers.set('Accept', 'application/json');
+                // let headers = new Headers();
+                // headers.set('Content-Type', 'application/json');
 
-                let formData = new FormData();
-                for ( let i=0; i< formulaire.length; ++i) {
-                    formData.append(formulaire[i].name, formulaire[i].value)// ajouter les valeurs du formulaire dans formData;
+                const data = {
+                    firstName: nom.value,
+                    lastName: prenom.value,
+                   address: adresse.value,
+                    city: ville.value,
+                   email: email.value,
                 }
-
                 // Récupérer que id et nombre article pour POST au serveur
                 let produitData = JSON.parse(localStorage.getItem('productInCart'));
                 produitData = Object.values(produitData);
+                post=[];
                     for ( let i=0; i< produitData.length;i++) {
-                        let postDataP= {
-                            inCart: produitData[i].inCart,
-                            id: produitData[i].id
-                        };
-                        postDataP = JSON.stringify(postDataP);
-                        formData.append('produit',postDataP)
+                        post.push(produitData[i].id)
+                        
                     }
-                
-                // Récupérer le numéro suivi de commande; date et mode de paiement pour POST au serveur
-                let dateData = JSON.stringify(localStorage.getItem('datecommande'));
-                let cardData = JSON.stringify(localStorage.getItem('choixpaiement'));
-                let ncommandeData = JSON.stringify(localStorage.getItem('numeroCommande'))
-                formData.append('date', dateData);
-                formData.append('card',cardData);
-
-                let formDataJson = JSON.stringify(formData);
 
                 let optionFetch = {
                     method: 'POST',
-                    headers,
-                    body: formDataJson,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify({'contact':data,
+                            'products':post})
                 }
-                let response = fetch ('http://localhost:3000/api/teddies', optionFetch); 
+                let response = fetch('http://localhost:3000/api/teddies/order', optionFetch); 
 
-                if(! response.ok) {
-                    let messageErreur = response.text;
-                    throw new Error(messageErreur);
-                }
+                response.then( async (data) => {
+                    try{ let info = await data.json();
+                    localStorage.setItem('orderId', info.orderId);// récupérer orderID reçu du serveur et stocker
+                    window.location.href = 'confirmationJS.html';// aller sur la page de confirmation quand tout ok
+
+                    }catch(error){ alert('erreur' + error)}
+                })
+               
+                
                 
             }
         })
 
-   
+
         
 
