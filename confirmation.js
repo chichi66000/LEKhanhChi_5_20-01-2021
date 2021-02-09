@@ -1,10 +1,11 @@
 
-
 /* récuperer le montant total dans locastorage pour afficher dans 1er partie du tableau*/
-
 
 let TOTAL = localStorage.getItem('TOTAL');
 TOTAL = parseInt(TOTAL);
+
+let fraisLivraison = localStorage.getItem('livraison');
+fraisLivraison = parseInt(fraisLivraison);
 
 let recapitulatif = document.getElementById('recapitulatif'); 
 
@@ -60,8 +61,6 @@ recapitulatif.append(tr2)
 recapitulatif.append(tr3)
 recapitulatif.append(date)
 
-
-
 // Récupérer info du produit, prix, date livraison... our 2eme tableau 
 let productInCart = JSON.parse(localStorage.getItem('productInCart'));
 
@@ -102,22 +101,43 @@ if (productInCart && info_product ) {
 
 let info_TOTAL = document.getElementById("info_TOTAL");
 let tr5 = document.createElement('tr');
-    tr5.setAttribute('class', 'fw-bold');
+    tr5.setAttribute('class', '');
+
+    let livraison = document.createElement('td');
+        // livraison.setAttribute('class', '')
+        livraison.innerHTML = "Frais de livraison";
+        tr5.append(livraison)
+    let livraison1 = document.createElement('td');
+        livraison1.setAttribute('colspan', '3');
+        livraison1.setAttribute('class', 'text-right');
+        livraison1.innerHTML = fraisLivraison ;
+        tr5.append(livraison1);
+
+let tr6 = document.createElement('tr');
+    tr6.setAttribute('class', 'fw-bold');
 
     let soustotal = document.createElement('td');
         soustotal.setAttribute('class', 'fw-bold');
         soustotal.innerHTML = "TOTAL";
-        tr5.append(soustotal);
+        tr6.append(soustotal);
 
     let soustotal1 = document.createElement('td');
         soustotal1.setAttribute('colspan', '3');
         soustotal1.setAttribute('class', 'text-right');
         soustotal1.innerHTML = TOTAL;
-        tr5.append(soustotal1);
+        tr6.append(soustotal1);
 info_TOTAL.append(tr5)
+info_TOTAL.append(tr6)
 
+// empêcher accéder au panier et afficher message
+let panier = document.querySelector('.fa-shopping-cart');
+panier.addEventListener('click', (e) =>{
+    e.preventDefault();
+    alert("Votre commande a été enregistrée")
+})
 // effacer le localStorage qu'une fois on a fini.
 localStorage.clear();
+// window.history.go(-4);
 
 
 
