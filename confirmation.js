@@ -137,7 +137,7 @@ panier.addEventListener('click', (e) =>{
 })
 // effacer le localStorage qu'une fois on a fini.
 localStorage.clear();
-// window.history.go(-4);
+
 
 
 
