@@ -1,10 +1,7 @@
 
 
 function updatePanier () {
-    // let totalCost = parseInt(localStorage.getItem('totalCost'));
-    let cartNumber = parseInt(localStorage.getItem('cartNumber'));
-    // let totalProduit= document.querySelector('.totalProduit'); 
-    // totalProduit.innerHTML = totalCost;// afficher le total des produits quand la page se rafraichir;  
+    let cartNumber = parseInt(localStorage.getItem('cartNumber')); 
     document.getElementById('in-cart-items-num').innerHTML = cartNumber;
 }
 updatePanier ()
@@ -22,11 +19,7 @@ updatePanier ()
         let pays = document.getElementById ('pays');
         let codePostal = document.getElementById('codePostal');
 
-/*
-        let validation = document.getElementById('btn-submit');
-        validation.addEventListener ('click', f_valid);
 
-        function f_valid (e) {*/
             let text_nom = /^[a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+([a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+)?$/;
             let text_validation = /^[a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+([-'\s][a-zA-ZéèîïÉÈÊËÍÌÎÏ][a-zéèîïàçâäêëôöùûüÿ]+)?$/;
             let tel_validation = /[0-9]{10}/;
@@ -59,9 +52,6 @@ updatePanier ()
             else if ( pays_validation.test (pays.value) == false) { e.preventDefault (); e.stopPropagation (); alert("pays: incorrect");}
         
             else { 
-                // let headers = new Headers();
-                // headers.set('Content-Type', 'application/json');
-
                 const data = {
                     firstName: nom.value,
                     lastName: prenom.value,
