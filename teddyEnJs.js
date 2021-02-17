@@ -110,7 +110,7 @@ let promise = fetch('http://localhost:3000/api/teddies')
         
             let panier= document.getElementById('btn');
             // récupérer les informations du produit grâce au data-*
-            var product = {
+            let product = {
                 name: panier.getAttribute('data-name'),
                 price: parseInt(panier.getAttribute('data-price')),
                 inCart: 0,
@@ -122,7 +122,8 @@ let promise = fetch('http://localhost:3000/api/teddies')
             panier.addEventListener('click', addPanier);//fonction quand on click sur le bouton
             function addPanier (data) {
                 data.preventDefault();
-                cartNumber(product);// fonction pour ajouter le nombre et nom du produit
+                cartNumber(product);// fonction pour ajouter le nombre 
+                setItem(product); // fonction pour ajouter le nom du produit
                 totalCost(product);// fonction pour calculer le total des articles
             }
             // function ajouter le nombre de produit, et afficher au panier
@@ -136,7 +137,6 @@ let promise = fetch('http://localhost:3000/api/teddies')
                 document.getElementById('in-cart-items-num').innerHTML = 1;} 
                 // si c'est la premiere fois, on ajoute dans le localstorage, panier = 1
 
-                setItem(product); // on ajoute une fonction pour mettre le nom du produit
             }
 
             function setItem(product) {
