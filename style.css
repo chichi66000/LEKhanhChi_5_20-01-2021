@@ -14,6 +14,7 @@ color: #339af0;
 }
 .fas{
     color: #339af0;  
+
 }
 a.list-group-item{
 background-color:#f8f9fa!important;
@@ -53,8 +54,9 @@ border:none;
 .text-right{
     text-align:right!important;
 }
+
 @media screen and (min-width: 576px) and (max-width:767px) {
-   
+
     .navbar-item{
         align-self:flex-end;
     }
@@ -89,4 +91,12 @@ border:none;
     .produit{
         height: 12rem
     }
+  
+}
+@media screen and (max-width:400px) {
+    .produit_paiement{
+        display:none;
+        
+    }
+    
 }
