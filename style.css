@@ -3,13 +3,10 @@ a{
     text-decoration:none!important;
 }
 a:hover ,
+
 a:focus {
     color: darkblue!important;
 }
-/* img{
-    object-fit: contain!important;
-} */
-
 /*style pour page accueil */
 .fab{
 font-size: 2rem;
@@ -64,15 +61,10 @@ border:none;
     .social {
         font-size: 1rem;
     }
-    .choix_en_plus{
-        height: 14rem;
-    }
 }
 
 @media screen and (max-width:575px) {
-    .choix_en_plus{
-        height: 16 rem;
-    }
+    
     .social {
         font-size: 1rem;
     }
@@ -81,11 +73,9 @@ border:none;
        margin:auto;
    }
    .produit{
-    height: 20rem
+    height: 15rem
 }
-.choix_en_plus{
-    height: 10rem;
-}
+
   
 }
 @media screen and (max-width:400px) {
@@ -97,10 +87,6 @@ border:none;
     margin:auto;
     }
     .produit{
-        height: 25rem
+        height: 12rem
     }
-    .choix_en_plus{
-        height: 10rem;
-    }
-    
 }
