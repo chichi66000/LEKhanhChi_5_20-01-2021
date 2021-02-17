@@ -205,7 +205,7 @@ inputChrono.addEventListener('change', ()=> { // quand le Chronopost est choisi,
     prixTOTAL();
 })
  
-inputColis.addEventListener('change', ()=> { // quand le Chronopost est choisi, on affiche le prix selon la quantity
+inputColis.addEventListener('change', ()=> { // quand le Cplissimo est choisi, on affiche le prix selon la quantity
     let allArticle = JSON.parse(localStorage.getItem('cartNumber'));
 
     if( inputColis.checked==false) {prixColis.innerHTML = ""; }
@@ -256,8 +256,7 @@ valideCommande.addEventListener('click', (e) => {
     }
     else {  datecommande(); // stocker la date passé le commande
             creditCard ();// stocker le mode de paiement
-            generate(); // générer un numéro de suivi commande 
-           }// si tout est ok; aller sur la page de formulaire_contact
+           window.location.href = "formulaire_contact.html";}// si tout est ok; aller sur la page de formulaire_contact
 })
 
 
@@ -285,11 +284,5 @@ localStorage.setItem('datecommande', datecommande);
     } 
     localStorage.setItem('choixpaiement', valueCC);
     return valueCC
-}
-
-/* Générer un numéro de commande et stocker dans localStorage quand on click sur button valider commande*/
-function generate() {
-    let numeroCommande = Math.floor((1 + Math.random()) * 0x10000);
-    localStorage.setItem('numeroCommande', numeroCommande)
 }
 
